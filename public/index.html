@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>AirLog</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="//cdn.bootcss.com/vue/2.3.3/vue.min.js"></script>
+    <script src="//cdn.bootcss.com/socket.io/1.7.0/socket.io.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1><a class="title" href="https://github.com/bigggge/AirLog/" target="_blank">AirLog</a></h1>
+      <div class="header">
+        <div class="performance">
+          <span>pageloadtime: {{ performance.pageloadtime }}ms | </span>
+          <span>dns: {{ performance.dns }}ms | </span>
+          <span>tcp: {{ performance.tcp }}ms | </span>
+          <span>ttfb: {{ performance.ttfb }}ms</span>
+        </div>
+        <input placeholder="filter" v-model="filterText">
+        <button @click="clearLogs()">Clear Logs</button>
+        <button @click="exportLogs()">Export Logs</button>
+
+      </div>
+      <div class="panel">
+        <div class="item" v-for="log in filteredLogs" :class="log.type">
+          <pre v-for="i in log.content" class="content">{{ i | pretty }}</pre>
+          <p v-show="log.source" class="error-info">at {{log.source}}: {{log.lineno}}行 {{log.colno}}列</p>
+          <span class="ua">{{ log.ua }}</span>
+          <span class="timestamp">{{ log.timestamp | timeformat }}</span>
+          <span class="host">{{ log.host }}</span>
+        </div>
+      </div>
+    </div>
+    <script src="airlog-admin.js"></script>
+  </body>
+</html>

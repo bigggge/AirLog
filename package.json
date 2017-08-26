@@ -1,0 +1,24 @@
+{
+  "name": "airlog",
+  "version": "0.3.0",
+  "description": "remote debugger",
+  "main": "airlog-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "bigggge",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bigggge/AirLog/issues"
+  },
+  "homepage": "https://github.com/bigggge/AirLog#readme",
+  "repository": "https://github.com/bigggge/AirLog",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "ip": "^1.1.5",
+    "morgan": "^1.8.2",
+    "socket.io": "1.7.0",
+    "useragent": "2.2.1"
+  }
+}
