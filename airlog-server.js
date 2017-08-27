@@ -3,7 +3,6 @@
  *
  * @author bigggge
  */
-
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -42,7 +41,6 @@ function sendLog (req, res) {
   io.emit(body.type, body.data);
 
   res.status(200).json({msg: 'ok'});
-
 }
 
 server.listen(port, function () {
@@ -51,5 +49,4 @@ server.listen(port, function () {
   console.log(
     '<script id="airlog" al-level="default" src="//' + address + '/airlog-client.js"></script>');
   console.log('\x1b[35m', '\n请不要关闭此窗口，在 ' + address + ' 查看调试页面的LOG');
-
 });
