@@ -18,7 +18,6 @@ var address = ip.address() + ':' + port;
 
 app.use(bodyParser());
 app.use(morgan('short'));
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -26,6 +25,8 @@ app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST');
   next();
 });
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.post('/report', sendLog);
 

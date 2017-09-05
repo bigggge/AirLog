@@ -20,11 +20,14 @@
         <input placeholder="filter" v-model="filterText">
         <button @click="clearLogs()">Clear Logs</button>
         <button @click="exportLogs()">Export Logs</button>
+        <button @click="toggleAll()">{{ showAll?'Collapse All':'Expand All'}}</button>
 
       </div>
       <div class="panel">
         <div class="item" v-for="log in filteredLogs" :class="log.type">
-          <pre v-for="i in log.content" class="content">{{ i | pretty }}</pre>
+          <button v-show="log.showToggleButton" @click="log.show=!log.show">{{ log.show?'Hide Detail':'Show Detail'}}</button>
+          <pre v-show="!log.show"class="content">{{ log.title }}</pre>
+          <pre v-show="log.show" v-for="i in log.content" class="content">{{ i | pretty }}</pre>
           <p v-show="log.source" class="error-info">at {{log.source}}: {{log.lineno}}行 {{log.colno}}列</p>
           <span class="ua">{{ log.ua }}</span>
           <span class="timestamp">{{ log.timestamp | timeformat }}</span>

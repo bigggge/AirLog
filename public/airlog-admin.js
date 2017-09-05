@@ -11,7 +11,9 @@ new Vue({
     logs: [],
     errors: [],
     performance: {pageloadtime: 0, dns: 0, tcp: 0, ttfb: 0},
-    filterText: ''
+    filterText: '',
+    show: true,
+    showAll: true
   },
 
   created: function () {
@@ -42,7 +44,8 @@ new Vue({
     filteredLogs: function () {
       var that = this;
       return this.logs.filter(function (log) {
-        return JSON.stringify(log.content).toLowerCase().indexOf(that.filterText.toLowerCase()) >= 0;
+        return JSON.stringify(log.content).toLowerCase().indexOf(that.filterText.toLowerCase()) >=
+          0;
       });
     }
   },
@@ -81,7 +84,6 @@ new Vue({
       delta = Math.floor(delta);
       return [delta, units, '前'].join('');
     }
-
   },
 
   methods: {
@@ -103,6 +105,9 @@ new Vue({
       }
     },
     addLog: function (data) {
+      data.show = true;
+      data.showToggleButton = JSON.stringify(data.content).length > 100;
+      data.title = data.content[0].toString().substring(0, 50);
       this.logs.unshift(data);
     },
     addPerformance: function (data) {
@@ -123,6 +128,13 @@ new Vue({
       document.body.appendChild(el);
       el.click();
       document.body.removeChild(el);
+    },
+    toggleAll: function () {
+      var vm = this;
+      vm.showAll = !vm.showAll;
+      vm.filteredLogs.forEach(function (t) {
+        t.show = vm.showAll;
+      });
     }
   }
 });
