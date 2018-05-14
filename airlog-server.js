@@ -16,7 +16,7 @@ var morgan = require('morgan');
 var port = process.argv.length > 2 ? ~~process.argv[2] : 3000;
 var address = ip.address() + ':' + port;
 
-app.use(bodyParser());
+app.use(bodyParser({limit: '50mb'}));
 app.use(morgan('short'));
 
 app.all('*', function (req, res, next) {
