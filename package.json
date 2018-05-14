@@ -1,6 +1,6 @@
 {
   "name": "airlog",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "remote debugger",
   "main": "airlog-server.js",
   "scripts": {
